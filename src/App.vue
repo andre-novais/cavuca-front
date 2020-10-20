@@ -1,6 +1,9 @@
 <template>
   <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
+  <!-- <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" /> -->
+  <div v-for="dataset in datasets" :key="dataset.name">
+    {{ dataset.name }}
+  </div>
 </template>
 
 <script lang="ts">
@@ -12,7 +15,23 @@ import HelloWorld from "./components/HelloWorld.vue";
     HelloWorld
   }
 })
-export default class App extends Vue {}
+export default class App extends Vue {
+  datasets = null;
+
+  mounted() {
+    console.log("###############");
+    this.fetchDatasets();
+    console.log(this.datasets);
+  }
+
+  fetchDatasets() {
+    fetch("http://localhost:3000/datasets")
+      .then(data => data.json())
+      .then(data => {
+        this.datasets = data;
+      });
+  }
+}
 </script>
 
 <style>
