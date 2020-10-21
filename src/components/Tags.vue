@@ -5,8 +5,6 @@
         <div class="btn btn-primary dataset-tag" v-for="tag in tags" :key="tag">
           {{ tag }}
         </div>
-        <br />
-        <br />
       </div>
     </div>
   </div>
@@ -25,3 +23,9 @@ export default class Tags extends Vue {
   tags!: string[];
 }
 </script>
+
+<style scoped>
+.dataset-tag {
+  font-size: 12px;
+}
+</style>
