@@ -9,9 +9,9 @@
 </template>
 
 <script lang="ts">
-import "bootstrap/dist/css/bootstrap.min.css";
-import { Options, Vue } from "vue-class-component";
-import DatasetPreview from "@/components/DatasetPreview.vue";
+import "bootstrap/dist/css/bootstrap.min.css"
+import { Options, Vue } from "vue-class-component"
+import DatasetPreview from "@/components/DatasetPreview.vue"
 
 @Options({
   components: {
@@ -22,7 +22,7 @@ import DatasetPreview from "@/components/DatasetPreview.vue";
   }
 })
 export default class DatasetListing extends Vue {
-  datasets!: Record<string, any>[];
+  datasets!: Record<string, unknown>[]
 }
 </script>
 

@@ -39,9 +39,9 @@
 </template>
 
 <script lang="ts">
-import "bootstrap/dist/css/bootstrap.min.css";
-import { Options, Vue } from "vue-class-component";
-import Tags from "@/components/Tags.vue";
+import "bootstrap/dist/css/bootstrap.min.css"
+import { Options, Vue } from "vue-class-component"
+import Tags from "@/components/Tags.vue"
 
 @Options({
   components: {
@@ -52,6 +52,6 @@ import Tags from "@/components/Tags.vue";
   }
 })
 export default class Dataset extends Vue {
-  dataset!: Record<string, any>;
+  dataset!: Record<string, unknown>
 }
 </script>

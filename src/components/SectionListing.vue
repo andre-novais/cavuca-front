@@ -10,8 +10,8 @@
 </template>
 
 <script lang="ts">
-import "bootstrap/dist/css/bootstrap.min.css";
-import { Options, Vue } from "vue-class-component";
+import "bootstrap/dist/css/bootstrap.min.css"
+import { Options, Vue } from "vue-class-component"
 
 @Options({
   props: {
@@ -20,8 +20,8 @@ import { Options, Vue } from "vue-class-component";
   }
 })
 export default class SectionListing extends Vue {
-  sections!: string[];
-  category!: string;
+  sections!: string[]
+  category!: string
 }
 </script>
 

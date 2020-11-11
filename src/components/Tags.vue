@@ -11,8 +11,8 @@
 </template>
 
 <script lang="ts">
-import "bootstrap/dist/css/bootstrap.min.css";
-import { Options, Vue } from "vue-class-component";
+import "bootstrap/dist/css/bootstrap.min.css"
+import { Options, Vue } from "vue-class-component"
 
 @Options({
   props: {
@@ -20,7 +20,7 @@ import { Options, Vue } from "vue-class-component";
   }
 })
 export default class Tags extends Vue {
-  tags!: string[];
+  tags!: string[]
 }
 </script>
 

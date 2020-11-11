@@ -3,9 +3,9 @@
 </template>
 
 <script lang="ts">
-import "bootstrap/dist/css/bootstrap.min.css";
-import { Options, Vue } from "vue-class-component";
-import DatasetListing from "@/components/DatasetListing.vue";
+import "bootstrap/dist/css/bootstrap.min.css"
+import { Options, Vue } from "vue-class-component"
+import DatasetListing from "@/components/DatasetListing.vue"
 
 @Options({
   components: {
@@ -19,24 +19,24 @@ import DatasetListing from "@/components/DatasetListing.vue";
   }
 })
 export default class Listing extends Vue {
-  datasets = null;
-  category!: string;
+  datasets = null
+  category?: string
 
   mounted() {
-    this.fetchDatasets();
+    this.fetchDatasets()
   }
 
   fetchDatasets() {
-    let url = "http://localhost:3000/datasets";
+    let url = "http://localhost:3000/datasets"
     if (this.$route.params.filterOption) {
-      url += `/${this.category}/${this.$route.params.filterOption}`;
+      url += `/${this.category}/${this.$route.params.filterOption}`
     }
 
     fetch(url)
       .then(data => data.json())
       .then(data => {
-        this.datasets = data;
-      });
+        this.datasets = data
+      })
   }
 }
 </script>

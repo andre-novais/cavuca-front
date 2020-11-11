@@ -1,7 +1,7 @@
-import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
-import Listing from "../views/Listing.vue";
-import Detail from "../views/Detail.vue";
-import Sections from "../views/Sections.vue";
+import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router"
+import Listing from "../views/Listing.vue"
+import Detail from "../views/Detail.vue"
+import Sections from "../views/Sections.vue"
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -87,11 +87,11 @@ const routes: Array<RouteRecordRaw> = [
     name: "Detail",
     component: Detail
   }
-];
+]
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
-});
+})
 
-export default router;
+export default router
