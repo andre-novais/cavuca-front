@@ -1,12 +1,13 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
-import Home from "../views/Home.vue";
+import Listing from "../views/Listing.vue";
 import Detail from "../views/Detail.vue";
+import Sections from "../views/Sections.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
-    name: "Home",
-    component: Home
+    name: "Listing",
+    component: Listing
   },
   {
     path: "/about",
@@ -16,6 +17,70 @@ const routes: Array<RouteRecordRaw> = [
     // which is lazy-loaded when the route is visited.
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/About.vue")
+  },
+  {
+    path: "/datasets/sites",
+    name: "Sites",
+    component: Sections,
+    props: {
+      category: "sites"
+    }
+  },
+  {
+    path: "/datasets/sites/:filterOption",
+    name: "ListingBySite",
+    component: Listing,
+    props: {
+      category: "sites"
+    }
+  },
+  {
+    path: "/datasets/groups",
+    name: "Group",
+    component: Sections,
+    props: {
+      category: "groups"
+    }
+  },
+  {
+    path: "/datasets/groups/:filterOption",
+    name: "ListingByGroup",
+    component: Listing,
+    props: {
+      category: "groups"
+    }
+  },
+  {
+    path: "/datasets/organizations",
+    name: "Organization",
+    component: Sections,
+    props: {
+      category: "organizations"
+    }
+  },
+  {
+    path: "/datasets/organizations/:filterOption",
+    name: "ListingByOrganization",
+    component: Listing,
+    props: {
+      category: "organizations"
+    }
+  },
+  {
+    path: "/datasets/tags",
+    name: "Tag",
+    component: Sections,
+    props: {
+      category: "tags"
+    }
+  },
+  {
+    path: "/datasets/tags/:filterOption",
+    name: "ListingByTag",
+    component: Listing,
+    props: {
+      category: "tags"
+    }
   },
   {
     path: "/datasets/:dataset_id",
