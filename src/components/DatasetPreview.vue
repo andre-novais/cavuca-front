@@ -10,8 +10,9 @@
 import "bootstrap/dist/css/bootstrap.min.css"
 import { Options, Vue } from "vue-class-component"
 import Tags from "@/components/Tags.vue"
-import { Dataset } from '@/typings/dataset'
-import { DatasetIndex } from '@/typings/datasetIndex'
+import { DatasetDto } from '@/typings/datasetDto'
+import { DatasetIndexDto } from '@/typings/datasetIndexDto'
+
 
 @Options({
   components: {
@@ -22,7 +23,7 @@ import { DatasetIndex } from '@/typings/datasetIndex'
   }
 })
 export default class DatasetListing extends Vue {
-  dataset!: Dataset | DatasetIndex
+  dataset!: DatasetDto | DatasetIndexDto
 }
 </script>
 

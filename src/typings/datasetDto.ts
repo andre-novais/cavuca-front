@@ -1,4 +1,4 @@
-export type Dataset = {
+export type DatasetDto = {
   name: string,
   description: string,
   organization?: {

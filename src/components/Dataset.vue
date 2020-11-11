@@ -11,10 +11,12 @@
         <th>aditional info</th>
       </thead>
       <tbody>
-        <tr v-for="(value, key) in dataset.aditionalInfo" :key="key">
-          <td>{{ key }}</td>
-          <td>{{ value }}</td>
-        </tr>
+        <div v-if="dataset.aditionalInfo">
+          <tr v-for="(value, key) in dataset.aditionalInfo" :key="key">
+            <td>{{ key }}</td>
+            <td>{{ value }}</td>
+          </tr>
+        </div>
       </tbody>
     </table>
     <br />
@@ -30,7 +32,7 @@
       <tbody>
         <tr v-for="resource in dataset.resources" :key="resource.name">
           <td>{{ resource.name }}</td>
-          <td>{{ resource.type }}</td>
+          <td>{{ resource.format }}</td>
           <td><a v-bind:href="resource.url">download</a></td>
         </tr>
       </tbody>
@@ -42,6 +44,7 @@
 import "bootstrap/dist/css/bootstrap.min.css"
 import { Options, Vue } from "vue-class-component"
 import Tags from "@/components/Tags.vue"
+import { DatasetDto } from "@/typings/datasetDto"
 
 @Options({
   components: {
@@ -52,6 +55,6 @@ import Tags from "@/components/Tags.vue"
   }
 })
 export default class Dataset extends Vue {
-  dataset!: Record<string, unknown>
+  dataset!: DatasetDto
 }
 </script>

@@ -1,4 +1,4 @@
-export type DatasetIndex = {
+export type DatasetIndexDto = {
   name: string,
   tags: string[] | [],
   groups: string[] | [],
