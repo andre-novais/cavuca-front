@@ -22,7 +22,7 @@ import { DatasetIndexDto } from '@/typings/datasetIndexDto'
     dataset: Object
   }
 })
-export default class DatasetListing extends Vue {
+export default class DatasetPreview extends Vue {
   dataset!: DatasetDto | DatasetIndexDto
 }
 </script>
