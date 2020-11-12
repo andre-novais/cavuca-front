@@ -1,12 +1,8 @@
 <template>
-  <div class="container">
-    <div class="row">
-      <div class="col-sm col-sm-offset-2">
-        <div class="btn btn-primary dataset-tag" v-for="tag in tags" :key="tag">
-          {{ tag }}
-        </div>
-      </div>
-    </div>
+  <div class="dataset-tags">
+    <a class="dataset-tag" v-bind:href="'/datasets/tags/' + tag" v-for="tag in tags" :key="tag">
+      {{ tag }}
+    </a>
   </div>
 </template>
 
@@ -25,7 +21,18 @@ export default class Tags extends Vue {
 </script>
 
 <style scoped>
+.dataset-tags {
+  text-align: start;
+}
 .dataset-tag {
   font-size: 12px;
+  padding: 0.1rem;
+  padding-left: 0.3rem;
+  padding-right: 0.3rem;
+  margin-right: 0.2rem;
+  text-decoration: none;
+  background-color: rgba(41, 136, 84, 0.575);
+  border-radius: 8px;
+  color:rgb(255, 255, 255)
 }
 </style>
