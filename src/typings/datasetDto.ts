@@ -24,5 +24,6 @@ export type DatasetDto = {
   }[] | [],
   unique_name: string,
   site_name: string,
-  _id: string
+  _id: string,
+  mongo_id: string
 }

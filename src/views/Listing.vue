@@ -5,6 +5,7 @@
   integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ"
   crossorigin="anonymous"
 >
+  <input type="text" v-model="q" placeholder="Procure datasets brasileiros" class="search-bar"/>
   <DatasetListing :datasets="datasets" />
 </template>
 
@@ -22,27 +23,56 @@ import DatasetListing from "@/components/DatasetListing.vue"
       type: String,
       required: false
     }
+  },
+  watch: {
+    'q': {
+      handler: 'onPropertyChanged',
+      immediate: false,
+      deep: true
+    }
   }
 })
 export default class Listing extends Vue {
   datasets = null
+  q = null
   category?: string
 
-  mounted() {
+  onPropertyChanged(value: any) {
+    this.q = value
     this.fetchDatasets()
   }
 
-  fetchDatasets() {
-    let url = "http://localhost:3000/datasets"
-    if (this.$route.params.filterOption) {
-      url += `/${this.category}/${this.$route.params.filterOption}`
+  async mounted() {
+    const debounce = require('debounce')
+    await this.fetchDatasets()
+    this.fetchDatasets = debounce(this.fetchDatasets, 1000)
+  }
+
+  async fetchDatasets() {
+    const axios = require('axios')
+
+    let url = ''
+    if(this.q === null) {
+      url = "http://localhost:3000/datasets"
+
+      if (this.$route.params.filterOption) {
+        url += `/${this.category}/${this.$route.params.filterOption}`
+      }
+    } else {
+      url = "http://localhost:3000/datasets/search"
     }
 
-    fetch(url)
-      .then(data => data.json())
-      .then(data => {
-        this.datasets = data
-      })
+
+    const params = { limit: 20, offset:0, q: this.q }
+    //url += `?limit=${params.limit}&offset=${params.offset}`
+
+    const res = await axios.get(url, { params: params })
+    console.log(res.data)
+    this.datasets = res.data
+      //.then(data => data.json())
+      //.then(data => {
+      //  this.datasets = data
+      //}).catch(err => console.log({err}))
   }
 }
 </script>
@@ -55,5 +85,12 @@ export default class Listing extends Vue {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+.search-bar {
+  width: 80%;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  border-color: white
 }
 </style>

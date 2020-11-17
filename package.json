@@ -9,7 +9,10 @@
     "start": "vue-cli-service serve"
   },
   "dependencies": {
+    "@types/axios": "^0.14.0",
+    "axios": "^0.21.0",
     "bootstrap": "^5.0.0-alpha2",
+    "debounce": "^1.2.0",
     "vue": "^3.0.0",
     "vue-class-component": "^8.0.0-0",
     "vue-property-decorator": "^9.0.2",

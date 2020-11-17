@@ -1,7 +1,7 @@
 <template>
   <div class="dataset">
     <div class="dataset-heading">
-      <a v-bind:href="'/datasets/' + dataset._id" class="dataset-name">
+      <a v-bind:href="'/datasets/' + datasetUrl(dataset)" class="dataset-name">
         {{ dataset.name }}
       </a>
       <div class="dataset-details">
@@ -53,6 +53,11 @@ export default class DatasetPreview extends Vue {
       .join(', ')
     const s = count > 1? 's' : ''
     return `${count} Arquivo${s} (${formats})`
+  }
+
+  datasetUrl(dataset: DatasetDto) {
+    const url = dataset._id ? dataset._id : dataset.mongo_id
+    return url
   }
 }
 </script>
