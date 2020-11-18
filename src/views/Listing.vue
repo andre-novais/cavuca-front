@@ -1,10 +1,4 @@
 <template>
-<link
-  rel="stylesheet"
-  href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
-  integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ"
-  crossorigin="anonymous"
->
   <input type="text" v-model="q" placeholder="Procure datasets brasileiros" class="search-bar"/>
   <DatasetListing :datasets="datasets" />
 </template>
@@ -66,7 +60,7 @@ export default class Listing extends Vue {
     const params = { limit: 20, offset:0, q: this.q }
     //url += `?limit=${params.limit}&offset=${params.offset}`
 
-    const res = await axios.get(url, { params: params })
+    const res = await axios.get(url, { params })
     console.log(res.data)
     this.datasets = res.data
       //.then(data => data.json())
@@ -84,13 +78,13 @@ export default class Listing extends Vue {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  margin-top: 3rem;
 }
 
 .search-bar {
   width: 80%;
   margin-bottom: 1rem;
-  border-radius: 8px;
+  border-radius: 0.4rem;
   border-color: white
 }
 </style>

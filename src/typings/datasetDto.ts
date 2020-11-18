@@ -14,7 +14,8 @@ export type DatasetDto = {
     url: string,
     type: string,
     format: string,
-    created_at: string
+    created_at: string,
+    updated_at: string
   }[],
   sourceUrl: string,
   groups: {

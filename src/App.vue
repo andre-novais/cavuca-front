@@ -1,4 +1,10 @@
 <template>
+  <link
+    rel="stylesheet"
+    href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+    integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ"
+    crossorigin="anonymous"
+  >
   <div id="nav">
     <router-link to="/">Home</router-link> |
     <router-link to="/datasets/sites">Sites</router-link> |
@@ -14,8 +20,11 @@
 html {
   background-color: rgb(213, 224, 233);
 }
+html * {
+  font-family: monospace;
+}
+
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -24,7 +33,7 @@ html {
 }
 
 #nav {
-  padding: 30px;
+  padding: 3rem;
 }
 
 #nav a {

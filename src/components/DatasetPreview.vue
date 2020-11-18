@@ -34,6 +34,12 @@ import Tags from "@/components/Tags.vue"
 import { DatasetDto } from '@/typings/datasetDto'
 //import { DatasetIndexDto } from '@/typings/datasetIndexDto'
 
+const dayjs = require('dayjs')
+import 'dayjs/locale/pt-br'
+const relativeTime = require('dayjs/plugin/relativeTime')
+dayjs.extend(relativeTime)
+dayjs.locale('pt-br')
+
 @Options({
   components: {
     Tags
@@ -52,7 +58,14 @@ export default class DatasetPreview extends Vue {
       .filter((v, i, a) => a.indexOf(v) === i)
       .join(', ')
     const s = count > 1? 's' : ''
-    return `${count} Arquivo${s} (${formats})`
+
+    const updatesEpochs = resources.map(resource => {
+      if (resource.updated_at) { return parseInt(resource.updated_at) }
+      else { return parseInt(resource.created_at) }
+    })
+    const lastUpdateEpoch = Math.min(...updatesEpochs)
+
+    return `${count} Arquivo${s} (${formats}) ultimo update ${dayjs(lastUpdateEpoch).fromNow()}`
   }
 
   datasetUrl(dataset: DatasetDto) {
@@ -66,17 +79,17 @@ export default class DatasetPreview extends Vue {
 .dataset {
   background-color: rgba(255, 255, 255, 0.473);
   margin-bottom: 0.7rem;
-  border-radius: 8px;
+  border-radius: 0.4rem;
 }
 .dataset-heading {
   text-align: start;
 }
 .dataset-name {
-  font-size: 16px;
+  font-size: 0.8rem;
 }
 .dataset-details {
   width: auto;
-  font-size: 13px;
+  font-size: 0.65rem;
   margin: 0 0 0 0;
   white-space: nowrap;
   overflow-x: auto;
@@ -89,7 +102,6 @@ export default class DatasetPreview extends Vue {
 }
 a {
   color: black;
-  font-family: monospace;
   text-decoration: none;
 }
 </style>
