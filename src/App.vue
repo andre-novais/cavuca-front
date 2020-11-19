@@ -8,8 +8,7 @@
   <div id="nav">
     <router-link to="/">Home</router-link> |
     <router-link to="/datasets/sites">Sites</router-link> |
-    <router-link to="/datasets/organizations">Organizations</router-link> |
-    <router-link to="/datasets/tags">Tags</router-link> |
+    <router-link to="/datasets/organizations">Organizações</router-link> |
     <router-link to="/about">About</router-link>
   </div>
   <router-view />

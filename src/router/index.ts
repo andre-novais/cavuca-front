@@ -51,14 +51,6 @@ const routes: Array<RouteRecordRaw> = [
     }
   },
   {
-    path: "/datasets/tags",
-    name: "Tag",
-    component: Sections,
-    props: {
-      category: "tags"
-    }
-  },
-  {
     path: "/datasets/tags/:filterOption",
     name: "ListingByTag",
     component: Listing,
