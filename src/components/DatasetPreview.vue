@@ -7,7 +7,7 @@
       <div class="dataset-details">
         <i class="fas fa-user fa-xs dataset-detail"></i>
         <p class="dataset-detail">
-          {{ dataset.site_name }}
+          {{ dataset.site_display_name }}
         </p>
       </div>
       <div class="dataset-details" v-if="dataset.organization">

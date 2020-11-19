@@ -29,12 +29,9 @@
   </div>
   <div class="side-painel">
     <div v-if="dataset.organization" class="side-painel-section">
-      <h6>{{ dataset.site_name }}</h6>
+      <h6>{{ dataset.site_display_name }}</h6>
       <i class="fas fa-archway organization-detail"></i>
       <h5 class="organization-detail">{{ dataset.organization.name }}</h5>
-    </div>
-    <div v-if="dataset.groups.length > 0" class="side-painel-section">
-      <h5>Grupos</h5>
     </div>
     <div v-if="dataset.tags.length > 0" class="side-painel-section">
       <h5>Tags</h5>
