@@ -6,7 +6,7 @@
       <h4 class="section-title">Descrição</h4>
       <p>{{ dataset.description }}</p>
     </div>
-    <div class="resources">
+    <div>
       <h4 class="section-title">Recursos</h4>
       <table class="resources">
         <thead>
@@ -15,7 +15,7 @@
           <th>ultimo update</th>
         </thead>
         <tbody>
-          <tr v-for="resource in dataset.resources" :key="resource.name">
+          <tr v-for="resource in dataset.resources" :key="resource.name" class="resource">
             <td><a v-bind:href="resource.url" v-bind:class="formatIcon(resource.format)"></a></td>
             <td>
               <h5 class="resource-name">{{ resource.name }}</h5>
@@ -26,11 +26,28 @@
         </tbody>
       </table>
     </div>
+    <div v-if="dataset.aditionalInfo" class="aditional-info-section">
+      <h4 class="section-title">Informação Adicional</h4>
+      <table class="resources">
+        <tbody>
+          <tr v-for="[key, value] of Object.entries(dataset.aditionalInfo)" :key="key">
+            <div v-if="value" class="aditional-info">
+              <th class="aditional-info-key">
+                {{ `${key}:` }}
+              </th>
+              <th class="aditional-info-value">
+                {{ value }}
+              </th>
+            </div>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
   <div class="side-painel">
     <div v-if="dataset.organization" class="side-painel-section">
       <h6>{{ dataset.site_display_name }}</h6>
-      <i class="fas fa-archway organization-detail"></i>
+      <i class="fas fa-archway organization-icon"></i>
       <h5 class="organization-detail">{{ dataset.organization.name }}</h5>
     </div>
     <div v-if="dataset.tags.length > 0" class="side-painel-section">
@@ -65,7 +82,7 @@ export default class Dataset extends Vue {
   dataset!: DatasetDto
 
   formatIcon(format: string) {
-    const classes = ['fas', 'fa-3x']
+    const classes = ['fas', 'fa-2x']
     const formatDict: any = {
       XML: 'fa-file-code',
       ZIP: 'fa-file-archive',
@@ -131,6 +148,7 @@ export default class Dataset extends Vue {
 }
 .resources {
   margin: 0 auto;
+  padding: 1rem;
 }
 a {
   color: black;
@@ -153,9 +171,24 @@ a {
   font-size: 1.2rem;
 }
 .organization-detail {
-  white-space: normal;
-  margin: 0 0 0 0.8rem;
+  white-space: pre-line;
+  margin: 0 0 0 0;
   font-size: 0.8rem;
   display: inline-block;
+  margin-right: 0.5rem;
+}
+.aditional-info {
+  font-size: 0.7rem;
+  padding: 1rem;
+}
+.aditional-info-key {
+  color: black;
+  float: left;
+}
+.aditional-info-value {
+  float: right;
+}
+.organization-icon {
+  margin-left: 0.5rem;
 }
 </style>

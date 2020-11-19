@@ -32,7 +32,6 @@ import "bootstrap/dist/css/bootstrap.min.css"
 import { Options, Vue } from "vue-class-component"
 import Tags from "@/components/Tags.vue"
 import { DatasetDto } from '@/typings/datasetDto'
-//import { DatasetIndexDto } from '@/typings/datasetIndexDto'
 
 const dayjs = require('dayjs')
 import 'dayjs/locale/pt-br'

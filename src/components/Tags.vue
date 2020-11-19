@@ -27,6 +27,7 @@ export default class Tags extends Vue {
   overflow-wrap: break-word;
 }
 .dataset-tag {
+  white-space: nowrap;
   font-size: 0.7rem;
   padding: 0.1rem;
   padding-left: 0.3rem;

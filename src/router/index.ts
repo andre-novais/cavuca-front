@@ -35,22 +35,6 @@ const routes: Array<RouteRecordRaw> = [
     }
   },
   {
-    path: "/datasets/groups",
-    name: "Group",
-    component: Sections,
-    props: {
-      category: "groups"
-    }
-  },
-  {
-    path: "/datasets/groups/:filterOption",
-    name: "ListingByGroup",
-    component: Listing,
-    props: {
-      category: "groups"
-    }
-  },
-  {
     path: "/datasets/organizations",
     name: "Organization",
     component: Sections,
