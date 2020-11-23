@@ -28,7 +28,7 @@ export default class Sections extends Vue {
   }
 
   fetchSections() {
-    const url = `${process.env.BACKEND_URL}/datasets/${this.category}`
+    const url = `${process.env.VUE_APP_BACKEND_URL}/datasets/${this.category}`
 
     fetch(url)
       .then(data => data.json())

@@ -47,13 +47,14 @@ export default class Listing extends Vue {
 
     let url = ''
     if(this.q === null) {
-      url = `${process.env.BACKEND_URL}/datasets`
+      url = `${process.env.VUE_APP_BACKEND_URL}/datasets`
+      console.log(url)
 
       if (this.$route.params.filterOption) {
         url += `/${this.category}/${this.$route.params.filterOption}`
       }
     } else {
-      url = `${process.env.BACKEND_URL}/datasets/search`
+      url = `${process.env.VUE_APP_BACKEND_URL}/datasets/search`
     }
 
 

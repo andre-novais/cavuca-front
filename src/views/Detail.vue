@@ -20,7 +20,7 @@ export default class Detail extends Vue {
   }
 
   fetchDataset() {
-    fetch(`${process.env.BACKEND_URL}/datasets/${this.$route.params.dataset_id}`)
+    fetch(`${process.env.VUE_APP_BACKEND_URL}/datasets/${this.$route.params.dataset_id}`)
       .then(data => data.json())
       .then(dataset => (this.dataset = dataset))
   }
