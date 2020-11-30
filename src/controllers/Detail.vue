@@ -1,15 +1,15 @@
 <template>
-  <Dataset :dataset="dataset" />
+  <DatasetDetail :dataset="dataset" />
 </template>
 
 <script lang="ts">
 import "bootstrap/dist/css/bootstrap.min.css"
 import { Options, Vue } from "vue-class-component"
-import Dataset from "@/components/Dataset.vue"
+import DatasetDetail from "@/views/DatasetDetail.vue"
 
 @Options({
   components: {
-    Dataset
+    DatasetDetail
   }
 })
 export default class Detail extends Vue {

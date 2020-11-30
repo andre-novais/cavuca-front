@@ -6,7 +6,7 @@
 <script lang="ts">
 import "bootstrap/dist/css/bootstrap.min.css"
 import { Options, Vue } from "vue-class-component"
-import DatasetListing from "@/components/DatasetListing.vue"
+import DatasetListing from "@/views/DatasetListing.vue"
 
 @Options({
   components: {

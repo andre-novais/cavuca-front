@@ -78,7 +78,7 @@ dayjs.locale('pt-br')
     dataset: Object
   }
 })
-export default class Dataset extends Vue {
+export default class DatasetDetail extends Vue {
   dataset!: DatasetDto
 
   formatIcon(format: string) {
