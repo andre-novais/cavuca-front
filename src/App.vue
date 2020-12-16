@@ -5,41 +5,36 @@
     integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ"
     crossorigin="anonymous"
   >
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/datasets/sites">Sites</router-link> |
-    <router-link to="/datasets/organizations">Organizações</router-link> |
-    <router-link to="/about">About</router-link>
-  </div>
+  <Header/>
   <router-view />
 </template>
 
+<script lang="ts">
+
+import { Options, Vue } from "vue-class-component"
+import Header from "@/components/Header.vue"
+
+@Options({
+  components: {
+    Header
+  }
+})
+export default class App extends Vue {}
+
+</script>
+
 <style>
-html {
-  background-color: rgb(213, 224, 233);
-}
+@import url('https://fonts.googleapis.com/css?family=Noto+serif');
+
 html * {
-  font-family: monospace;
+  font-family: noto-serif;
 }
 
 #app {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-  background-color: rgb(213, 224, 233);
-}
-
-#nav {
-  padding: 3rem;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
+  color: black;
+  background-color: #E1E1E1;
 }
 </style>
