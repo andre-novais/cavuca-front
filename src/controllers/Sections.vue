@@ -3,7 +3,6 @@
 </template>
 
 <script lang="ts">
-import "bootstrap/dist/css/bootstrap.min.css"
 import { Options, Vue } from "vue-class-component"
 import SectionListing from "@/views/SectionListing.vue"
 import { Watch } from "vue-property-decorator"

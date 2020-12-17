@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router"
+import LandingPage from "../controllers/LandingPage.vue"
 import Listing from "../controllers/Listing.vue"
 import Detail from "../controllers/Detail.vue"
 import Sections from "../controllers/Sections.vue"
@@ -7,15 +8,17 @@ import About from "../controllers/About.vue"
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
+    name: "LandingPage",
+    component: LandingPage
+  },
+  {
+    path: "/pesquisa",
     name: "Listing",
     component: Listing
   },
   {
     path: "/about",
     name: "About",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
     component: About
   },
   {

@@ -24,10 +24,11 @@ export default class App extends Vue {}
 </script>
 
 <style>
-@import url('https://fonts.googleapis.com/css?family=Noto+serif');
+@import url('https://fonts.googleapis.com/css?family=Noto+Serif');
 
 html * {
   font-family: noto-serif;
+  margin: 0px;
 }
 
 #app {
@@ -35,6 +36,10 @@ html * {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: black;
+  background-color: #E1E1E1;
+}
+
+html {
   background-color: #E1E1E1;
 }
 </style>

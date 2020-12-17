@@ -1,34 +1,25 @@
 <template>
   <div class="dataset">
-    <div class="dataset-heading">
-      <a v-bind:href="'/datasets/' + datasetUrl(dataset)" class="dataset-name">
-        {{ dataset.name }}
-      </a>
-      <div class="dataset-details">
-        <i class="fas fa-user fa-xs dataset-detail"></i>
-        <p class="dataset-detail">
-          {{ dataset.site_display_name }}
-        </p>
-      </div>
-      <div class="dataset-details" v-if="dataset.organization">
-        <i class="fas fa-archway fa-xs dataset-detail"></i>
-        <p class="dataset-detail">
-          {{ dataset.organization.name }}
-        </p>
-      </div>
-      <div class="dataset-details">
-        <i class="fas fa-file fa-xs dataset-detail"></i>
-        <p class="dataset-detail">
-          {{ resourcesInfo(dataset.resources) }}
-        </p>
-      </div>
+    <div class="info details">
+      <i class="fas fa-user fa-xs detail"></i>
+      <p class="detail">
+        {{ dataset.site_display_name + '/ ' + dataset.organization.name }}
+      </p>
     </div>
-    <Tags :tags="dataset.tags" />
+    <h2 class="info name">{{ dataset.name }}</h2>
+    <div>
+      <h3 class="info tags">{{ relevantTags() }}</h3>
+      <div class="resource-info-container">
+        <i class="fas fa-file fa-xs resource-icon"></i>
+        <p class="resource-info">{{ resourcesInfo() }}</p>
+      </div>
+
+    </div>
+    <p class="description">{{ dataset.description }}</p>
   </div>
 </template>
 
 <script lang="ts">
-import "bootstrap/dist/css/bootstrap.min.css"
 import { Options, Vue } from "vue-class-component"
 import Tags from "@/components/Tags.vue"
 import { DatasetDto } from '@/typings/datasetDto'
@@ -50,7 +41,8 @@ dayjs.locale('pt-br')
 export default class DatasetPreview extends Vue {
   dataset!: DatasetDto
 
-  resourcesInfo(resources: DatasetDto['resources']): string {
+  resourcesInfo(): string {
+    const resources: DatasetDto['resources'] = this.dataset.resources
     const count = resources.length
     const formats = resources
       .map(resource => resource.format.toLowerCase())
@@ -71,36 +63,119 @@ export default class DatasetPreview extends Vue {
     const url = dataset._id ? dataset._id : dataset.mongo_id
     return url
   }
+
+  relevantTags() {
+    return this.dataset.tags.slice(0,3).join(', ')
+  }
 }
 </script>
 
 <style scoped>
 .dataset {
-  background-color: rgba(255, 255, 255, 0.473);
-  margin-bottom: 0.7rem;
-  border-radius: 0.4rem;
+  background-color: rgba(255, 255, 255, 1);
+  box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.25);
+  margin-top: 16px;
+  border-radius: 5px;
+  padding: 8px;
+  height: 125px;
 }
-.dataset-heading {
+.heading {
   text-align: start;
 }
-.dataset-name {
-  font-size: 0.8rem;
-}
-.dataset-details {
-  width: auto;
-  font-size: 0.65rem;
-  margin: 0 0 0 0;
+.info {
   white-space: nowrap;
-  overflow-x: auto;
-  overflow-y: hidden;
+  position: relative;
+  float: left;
+  text-align: left;
+  margin-bottom: 0px;
+  clear: both;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
 }
-.dataset-detail {
-  margin: 0 0 0 0;
-  width: 2%;
+
+.details {
+  color:  rgba(0,0,0,0.8);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+}
+
+.detail {
+  position:relative;
   display: inline-block;
+  margin-right: 2px;
+  margin-bottom: 0px;
+  white-space: nowrap;
 }
 a {
   color: black;
   text-decoration: none;
+}
+
+.name {
+  position: relative;
+  color: black;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 25px;
+  letter-spacing: 0em;
+  text-align: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+}
+.tags {
+  font-family: Noto Serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 25px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: rgba(66,2,61,1);
+  width: fit-content;
+}
+.description {
+  font-family: Noto Serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 19px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: black;
+  max-width: inherit;
+  max-height: 38px;position: relative;
+  float: left;
+  text-align: left;
+  margin-bottom: 0px;
+  clear: both;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.resource-info-container {
+  position: relative;
+  float: right;
+  margin-bottom: 0px;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.resource-icon {
+  display: inline-block;
+  margin-right: 3px;
+}
+
+.resource-info {
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 19px;
+  letter-spacing: 0em;
+  display: inline-block;
+  margin-bottom: 0px;
 }
 </style>

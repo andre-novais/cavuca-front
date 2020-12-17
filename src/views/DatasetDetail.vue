@@ -59,7 +59,6 @@
 </template>
 
 <script lang="ts">
-import "bootstrap/dist/css/bootstrap.min.css"
 import { Options, Vue } from "vue-class-component"
 import Tags from "@/components/Tags.vue"
 import { DatasetDto } from "@/typings/datasetDto"
