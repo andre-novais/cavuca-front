@@ -1,5 +1,5 @@
 <template>
-  <div class="dataset">
+  <div class="dataset" v-on:click="enterDataset()">
     <div class="info details">
       <i class="fas fa-user fa-xs detail"></i>
       <p class="detail">
@@ -66,6 +66,10 @@ export default class DatasetPreview extends Vue {
 
   relevantTags() {
     return this.dataset.tags.slice(0,3).join(', ')
+  }
+
+  enterDataset() {
+    this.$router.push('/dados/' + this.dataset._id)
   }
 }
 </script>
