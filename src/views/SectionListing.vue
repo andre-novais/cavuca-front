@@ -38,7 +38,6 @@ export default class SectionListing extends Vue {
   displayedSections = this.sections//_.sampleSize(this.sections, 20)
 
   onPropertyChanged(value: any) {
-      console.log(this.displayedSections)
     if (value == '') {
       this.displayedSections = this.sections
     } else {

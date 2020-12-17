@@ -1,9 +1,8 @@
 <template>
-  <DatasetListing :datasets="datasets" />
+  <DatasetListing :datasets="datasets" :key="datasets"/>
 </template>
 
 <script lang="ts">
-import "bootstrap/dist/css/bootstrap.min.css"
 import { Options, Vue } from "vue-class-component"
 import DatasetListing from "@/views/DatasetListing.vue"
 
@@ -11,57 +10,45 @@ import DatasetListing from "@/views/DatasetListing.vue"
   components: {
     DatasetListing
   },
-  props: {
-    category: {
-      type: String,
-      required: false
+  watch:{
+    $route (){
+      this.fetchDatasets()
     }
-  },
-  watch: {
-    'q': {
-      handler: 'onPropertyChanged',
-      immediate: false,
-      deep: true
-    }
-  }
+}
 })
 export default class Listing extends Vue {
   datasets = null
-  q = null
-  category?: string
 
-  onPropertyChanged(value: any) {
-    this.q = value
-    this.fetchDatasets()
-  }
 
-  async mounted() {
-    const debounce = require('debounce')
+  async created() {
     await this.fetchDatasets()
-    this.fetchDatasets = debounce(this.fetchDatasets, 1000)
   }
 
   async fetchDatasets() {
+    this.datasets = null
+
     const axios = require('axios')
+    const q = this.$route.query.q
+    const isOrganizationQuery = this.$route.path.match(/dados\/organizacoes/i)
+    const isTagsQuery = this.$route.path.match(/dados\/tags/i)
 
     let url = ''
-    if(this.q === null) {
+    if(isOrganizationQuery) {
+      url = `${process.env.VUE_APP_BACKEND_URL}/datasets/organizations/${this.$route.params.filterOption}`
+    } else if(isTagsQuery) {
+      url = `${process.env.VUE_APP_BACKEND_URL}/datasets/tags/${this.$route.params.filterOption}`
+    } else if(!q) {
       url = `${process.env.VUE_APP_BACKEND_URL}/datasets`
-      console.log(url)
 
-      if (this.$route.params.filterOption) {
-        url += `/${this.category}/${this.$route.params.filterOption}`
-      }
     } else {
       url = `${process.env.VUE_APP_BACKEND_URL}/datasets/search`
     }
 
 
-    const params = { limit: 20, offset:0, q: this.q }
+    const params = { limit: 20, offset:0, q: q }
     //url += `?limit=${params.limit}&offset=${params.offset}`
 
     const res = await axios.get(url, { params })
-    console.log(res.data)
     this.datasets = res.data
       //.then(data => data.json())
       //.then(data => {

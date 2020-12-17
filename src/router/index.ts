@@ -22,7 +22,7 @@ const routes: Array<RouteRecordRaw> = [
     component: About
   },
   {
-    path: "/datasets/sites",
+    path: "/dados/sites",
     name: "Sites",
     component: Sections,
     props: {
@@ -30,7 +30,7 @@ const routes: Array<RouteRecordRaw> = [
     }
   },
   {
-    path: "/datasets/sites/:filterOption",
+    path: "/dados/sites/:filterOption",
     name: "ListingBySite",
     component: Listing,
     props: {
@@ -38,15 +38,7 @@ const routes: Array<RouteRecordRaw> = [
     }
   },
   {
-    path: "/datasets/organizations",
-    name: "Organization",
-    component: Sections,
-    props: {
-      category: "organizations"
-    }
-  },
-  {
-    path: "/datasets/organizations/:filterOption",
+    path: "/dados/organizacoes/:filterOption",
     name: "ListingByOrganization",
     component: Listing,
     props: {
@@ -54,7 +46,7 @@ const routes: Array<RouteRecordRaw> = [
     }
   },
   {
-    path: "/datasets/tags/:filterOption",
+    path: "/dados/tags/:filterOption",
     name: "ListingByTag",
     component: Listing,
     props: {
@@ -62,7 +54,7 @@ const routes: Array<RouteRecordRaw> = [
     }
   },
   {
-    path: "/datasets/:dataset_id",
+    path: "/dados/:dataset_id",
     name: "Detail",
     component: Detail
   }
