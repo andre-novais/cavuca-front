@@ -82,6 +82,7 @@ export default class DatasetPreview extends Vue {
   border-radius: 5px;
   padding: 8px;
   height: 125px;
+  cursor: pointer;
 }
 .heading {
   text-align: start;

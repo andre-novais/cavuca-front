@@ -68,6 +68,7 @@ export default class Header extends Vue {
     position: relative;
     top: 34px;
     right: 10px;
-    color: rgba(0,0,0,0.80)
+    color: rgba(0,0,0,0.80);
+    cursor: pointer;
   }
 </style>

@@ -89,6 +89,7 @@ export default class LandingPage extends Vue{
     position: relative;
     top: 2px;
     right: 30px;
-    color: rgba(0,0,0,0.80)
+    color: rgba(0,0,0,0.80);
+    cursor: pointer;
   }
 </style>
