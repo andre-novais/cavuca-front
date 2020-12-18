@@ -50,10 +50,7 @@
       <i class="fas fa-archway organization-icon"></i>
       <h5 class="organization-detail">{{ dataset.organization.name }}</h5>
     </div>
-    <div v-if="dataset.tags.length > 0" class="side-painel-section">
-      <h5>Tags</h5>
-      <Tags :tags="dataset.tags" />
-    </div>
+    <Tags :tags="dataset.tags" />
   </div>
 </div>
 </template>
@@ -189,5 +186,19 @@ a {
 }
 .organization-icon {
   margin-left: 0.5rem;
+}
+.container {
+  display: grid;
+  grid-template-columns: 16px minmax(500px, 1fr) 16px 462px 16px;
+  grid-template-rows: auto;
+  grid-template-areas: ". main . sidebar .";
+}
+
+.main {
+  grid-area: main;
+}
+
+.sidebar {
+  grid-area: sidebar;
 }
 </style>

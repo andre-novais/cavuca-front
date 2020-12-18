@@ -10,17 +10,7 @@
       {{ organization.slice(0, 44) }}
     </span>
   </div>
-  <div class="section relevant-tags">
-    <h2>Tags relevantes:</h2>
-    <span
-      class="tag"
-      v-for="tag in relevantTags()"
-      :key="tag"
-      v-on:click="searchTag(tag)"
-    >
-      {{ tag.slice(0, 44) }}
-    </span>
-  </div>
+  <Tags :tags="relevantTags()"/>
   <div class="section ads" v-if="hasAds">
     ta
   </div>
@@ -30,8 +20,12 @@
 
 import { DatasetDto } from "@/typings/datasetDto"
 import { Options, Vue } from "vue-class-component"
+import Tags from "@/components/Tags.vue"
 
 @Options({
+  components: {
+    Tags
+  },
   props: {
     datasets: Array
   }
@@ -126,22 +120,11 @@ export default class Header extends Vue {
     align-items: center;
     float: left;
     border-radius: 16px;
+    cursor: pointer;
   }
   .organization {
     height: 49px;
     margin-right: 16px;
     margin-bottom: 16px;
-  }
-  .relevant-tags {
-    max-height: 219px;
-    overflow: hidden;
-  }
-  .tag {
-    height: 24px;
-    margin-right: 8px;
-    margin-bottom: 8px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
   }
 </style>

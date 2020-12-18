@@ -1,8 +1,14 @@
 <template>
-  <div class="dataset-tags">
-    <a class="dataset-tag" v-bind:href="'/datasets/tags/' + tag" v-for="tag in tags" :key="tag">
-      {{ tag }}
-    </a>
+  <div class="section relevant-tags">
+    <h2>Tags relevantes:</h2>
+    <span
+      class="tag"
+      v-for="tag in tags"
+      :key="tag"
+      v-on:click="searchTag(tag)"
+    >
+      {{ tag.slice(0, 49) }}
+    </span>
   </div>
 </template>
 
@@ -16,25 +22,51 @@ import { Options, Vue } from "vue-class-component"
 })
 export default class Tags extends Vue {
   tags!: string[]
+
+  searchTag(tag: string): void {
+    this.$router.push('/dados/tags/' + tag)
+  }
 }
 </script>
 
 <style scoped>
-.dataset-tags {
-  text-align: start;
-  white-space: pre-line;
-  overflow-wrap: break-word;
-}
-.dataset-tag {
-  white-space: nowrap;
-  font-size: 0.7rem;
-  padding: 0.1rem;
-  padding-left: 0.3rem;
-  padding-right: 0.3rem;
-  margin-right: 0.2rem;
-  text-decoration: none;
-  background-color: rgba(41, 136, 84, 0.575);
-  border-radius: 0.4rem;
-  color:rgb(255, 255, 255);
-}
+  h2 {
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 33px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: black;
+  }
+  span {
+    color: white;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    background-color: rgba(66,2,61,1);
+    width: fit-content;
+    max-width: 300px;
+    padding: 0 8px 0 8px;
+    display: flex;
+    align-items: center;
+    float: left;
+    border-radius: 16px;
+    height: 24px;
+    margin-right: 8px;
+    margin-bottom: 8px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: pointer;
+  }
+  div {
+    max-height: 219px;
+    overflow: hidden;
+    box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.25);
+    background-color: white;
+    padding: 8px;
+    border-radius: 5px;
+    margin-top: 16px;
+  }
 </style>
