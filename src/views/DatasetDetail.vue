@@ -6,10 +6,11 @@
           <i class="fas fa-user fa-xs organization-detail"></i>
           <h3 class="organization-detail">
             <h3 class="organization-info clickabel" v-on:click="searchSite(dataset.site_name)">{{ dataset.site_display_name  }}</h3>
-            / <h3 class="organization-info clickabel" v-on:click="searchOrg(dataset.organization.name)"> {{ dataset.organization.name }} </h3></h3>
+            / <h3 class="organization-info clickabel" v-on:click="searchOrg(dataset.organization.name)"> {{ dataset.organization.name }} </h3>
+          </h3>
         </div>
         <h2>{{ dataset.name }}</h2>
-        <p>{{ dataset.description }}</p>
+        <p>{{ filterDescription(dataset.description) }}</p>
         <div class="resources">
           <a
             class="resource"
@@ -21,7 +22,7 @@
             <i class="resource-detail resource-icon" :class="formatIcon(resource.format)"></i>
             <div class="resource-detail resource-identity">
               <h4>{{ resource.name }}</h4>
-              <p class="resource-description">{{ resource.description }}</p>
+              <p class="resource-description">{{ filterDescription(resource.description) }}</p>
             </div>
             <p class="resource-detail resource-date">{{ getDate(resource) }}</p>
           </a>
@@ -100,6 +101,10 @@ export default class DatasetDetail extends Vue {
   searchOrg(organization: string): void {
     this.$router.push('/dados/organizacoes/' + organization)
   }
+
+  filterDescription(description: string): string {
+    return description.replaceAll(/<([\s\S]*?)>/g, '')
+  }
 }
 </script>
 
@@ -160,6 +165,7 @@ export default class DatasetDetail extends Vue {
   padding: 0 8px 0 8px;
   margin:-16px;
   margin-bottom: 32px;
+    box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.25);
 }
 .resource-icon {
   top: -5px;

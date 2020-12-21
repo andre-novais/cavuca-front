@@ -2,7 +2,6 @@ import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router"
 import LandingPage from "../controllers/LandingPage.vue"
 import Listing from "../controllers/Listing.vue"
 import Detail from "../controllers/Detail.vue"
-import Sections from "../controllers/Sections.vue"
 import About from "../controllers/About.vue"
 
 const routes: Array<RouteRecordRaw> = [
@@ -20,14 +19,6 @@ const routes: Array<RouteRecordRaw> = [
     path: "/about",
     name: "About",
     component: About
-  },
-  {
-    path: "/dados/sites",
-    name: "Sites",
-    component: Sections,
-    props: {
-      category: "sites"
-    }
   },
   {
     path: "/dados/sites/:filterOption",

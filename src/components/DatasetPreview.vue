@@ -1,21 +1,23 @@
 <template>
-  <div class="dataset" v-on:click="enterDataset()">
-    <div class="info details">
-      <i class="fas fa-user fa-xs detail"></i>
-      <p class="detail">
-        {{ dataset.site_display_name + '/ ' + dataset.organization.name }}
-      </p>
+  <div class="dataset" >
+    <div class="organization">
+      <i class="fas fa-user fa-xs organization-detail"></i>
+      <h3 class="organization-detail">
+        <h3 class="organization-info clickabel" v-on:click="searchSite(dataset.site_display_name)">{{ dataset.site_display_name  }}</h3>
+        / <h3 class="organization-info clickabel" v-on:click="searchOrg(dataset.organization.name)"> {{ dataset.organization.name }} </h3>
+      </h3>
     </div>
-    <h2 class="info name">{{ dataset.name }}</h2>
+    <div class="dataset-link" v-on:click="enterDataset()">
+      <h2 class="info name">{{ dataset.name }}</h2>
     <div>
       <h3 class="info tags">{{ relevantTags() }}</h3>
       <div class="resource-info-container">
         <i class="fas fa-file fa-xs resource-icon"></i>
         <p class="resource-info">{{ resourcesInfo() }}</p>
       </div>
-
     </div>
-    <p class="description">{{ dataset.description }}</p>
+    <p class="description">{{ filterDescription(dataset.description) }}</p>
+    </div>
   </div>
 </template>
 
@@ -74,13 +76,24 @@ export default class DatasetPreview extends Vue {
     return this.dataset.tags.slice(0,3).join(', ')
   }
 
+  searchSite(organization: string): void {
+    this.$router.push('/dados/sites/' + organization)
+  }
+  searchOrg(organization: string): void {
+    this.$router.push('/dados/organizacoes/' + organization)
+  }
+
   enterDataset() {
     if(this.dataset._id) {
       this.$router.push('/dados/' + this.dataset._id)
     } else {
       this.$router.push('/dados/' + this.dataset.mongo_id)
     }
+  }
 
+  filterDescription(description: string): string {
+    description = description.replaceAll(/<.*?>/gi, '')
+    return description
   }
 }
 </script>
@@ -109,7 +122,25 @@ export default class DatasetPreview extends Vue {
   text-overflow: ellipsis;
   width: 100%;
 }
-
+.organization-detail {
+  display: inline-block;
+  white-space: nowrap;
+  color: rgba(0,0,0,0.80);
+}
+.organization-info {
+  display: inline-block;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 19px;
+  text-align: left;
+}
+.clickabel {
+  cursor: pointer;
+}
+.organization {
+  float: left;
+}
 .details {
   color:  rgba(0,0,0,0.8);
   font-size: 14px;
@@ -154,17 +185,15 @@ a {
   width: fit-content;
 }
 .description {
-  font-family: Noto Serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
   line-height: 19px;
-  letter-spacing: 0em;
   text-align: left;
   color: black;
   max-width: inherit;
-  max-height: 38px;position: relative;
-  float: left;
+  max-height: 38px;
+  position: relative;
   text-align: left;
   margin-bottom: 0px;
   clear: both;

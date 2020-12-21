@@ -7,7 +7,7 @@
       :key="organization"
       v-on:click="searchOrg(organization)"
     >
-      {{ organization.slice(0, 44) }}
+      {{ organization.slice(0, 80) }}
     </span>
   </div>
   <Tags :tags="relevantTags()"/>
@@ -109,19 +109,20 @@ export default class Header extends Vue {
   }
   span {
     color: white;
-    font-size: 18px;
+    font-size: 14px;
     font-style: normal;
     font-weight: 700;
     background-color: rgba(66,2,61,1);
     width: fit-content;
-    max-width: 191px;
+    max-width: 180px;
     padding: 0 8px 0 8px;
     display: flex;
     align-items: center;
     float: left;
     border-radius: 16px;
     cursor: pointer;
-    border: 1px solid rgba(0,0,0,1)
+    border: 1px solid rgba(0,0,0,1);
+    box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.25);
   }
   .organization {
     height: 49px;

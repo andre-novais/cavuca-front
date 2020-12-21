@@ -31,12 +31,15 @@ export default class Listing extends Vue {
     const q = this.$route.query.q
     const isOrganizationQuery = this.$route.path.match(/dados\/organizacoes/i)
     const isTagsQuery = this.$route.path.match(/dados\/tags/i)
+    const isSiteQuery = this.$route.path.match(/dados\/sites/i)
 
     let url = ''
     if(isOrganizationQuery) {
       url = `${process.env.VUE_APP_BACKEND_URL}/datasets/organizations/${this.$route.params.filterOption}`
     } else if(isTagsQuery) {
       url = `${process.env.VUE_APP_BACKEND_URL}/datasets/tags/${this.$route.params.filterOption}`
+    } else if(isSiteQuery) {
+      url = `${process.env.VUE_APP_BACKEND_URL}/datasets/sites/${this.$route.params.filterOption}`
     } else if(!q) {
       url = `${process.env.VUE_APP_BACKEND_URL}/datasets`
 
