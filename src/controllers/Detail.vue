@@ -14,7 +14,7 @@ import DatasetDetail from "@/views/DatasetDetail.vue"
 export default class Detail extends Vue {
   dataset = null
 
-  mounted() {
+  created() {
     this.fetchDataset()
   }
 

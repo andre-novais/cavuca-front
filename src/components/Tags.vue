@@ -59,6 +59,7 @@ export default class Tags extends Vue {
     text-overflow: ellipsis;
     white-space: nowrap;
     cursor: pointer;
+    border: 1px solid rgba(0,0,0,1);
   }
   div {
     max-height: 219px;

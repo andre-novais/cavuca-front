@@ -1,58 +1,37 @@
 <template>
-<div v-if="dataset" class="detail">
-  <div class="dataset">
-    <h1 class="dataset-name">{{ dataset.name }}</h1>
-    <div>
-      <h4 class="section-title">Descrição</h4>
-      <p>{{ dataset.description }}</p>
-    </div>
-    <div>
-      <h4 class="section-title">Recursos</h4>
-      <table class="resources">
-        <thead>
-          <th>link</th>
-          <th>nome</th>
-          <th>ultimo update</th>
-        </thead>
-        <tbody>
-          <tr v-for="resource in dataset.resources" :key="resource.name" class="resource">
-            <td><a v-bind:href="resource.url" v-bind:class="formatIcon(resource.format)"></a></td>
-            <td>
-              <h5 class="resource-name">{{ resource.name }}</h5>
+  <div class="container" v-if="dataset">
+    <div class="main">
+      <div class="dataset">
+        <div class="organization">
+          <i class="fas fa-user fa-xs organization-detail"></i>
+          <h3 class="organization-detail">
+            <h3 class="organization-info clickabel" v-on:click="searchSite(dataset.site_name)">{{ dataset.site_display_name  }}</h3>
+            / <h3 class="organization-info clickabel" v-on:click="searchOrg(dataset.organization.name)"> {{ dataset.organization.name }} </h3></h3>
+        </div>
+        <h2>{{ dataset.name }}</h2>
+        <p>{{ dataset.description }}</p>
+        <div class="resources">
+          <a
+            class="resource"
+            v-for="resource in dataset.resources"
+            :key="resource.name"
+            :href="resource.url"
+            target="#"
+          >
+            <i class="resource-detail resource-icon" :class="formatIcon(resource.format)"></i>
+            <div class="resource-detail resource-identity">
+              <h4>{{ resource.name }}</h4>
               <p class="resource-description">{{ resource.description }}</p>
-            </td>
-            <td class="resource-date">{{ getDate(resource) }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div v-if="dataset.aditionalInfo" class="aditional-info-section">
-      <h4 class="section-title">Informação Adicional</h4>
-      <table class="resources">
-        <tbody>
-          <tr v-for="[key, value] of Object.entries(dataset.aditionalInfo)" :key="key">
-            <div v-if="value" class="aditional-info">
-              <th class="aditional-info-key">
-                {{ `${key}:` }}
-              </th>
-              <th class="aditional-info-value">
-                {{ value }}
-              </th>
             </div>
-          </tr>
-        </tbody>
-      </table>
+            <p class="resource-detail resource-date">{{ getDate(resource) }}</p>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="sidebar">
+      <Tags :tags="dataset.tags" />
     </div>
   </div>
-  <div class="side-painel">
-    <div v-if="dataset.organization" class="side-painel-section">
-      <h6>{{ dataset.site_display_name }}</h6>
-      <i class="fas fa-archway organization-icon"></i>
-      <h5 class="organization-detail">{{ dataset.organization.name }}</h5>
-    </div>
-    <Tags :tags="dataset.tags" />
-  </div>
-</div>
 </template>
 
 <script lang="ts">
@@ -61,10 +40,6 @@ import Tags from "@/components/Tags.vue"
 import { DatasetDto } from "@/typings/datasetDto"
 
 const dayjs = require('dayjs')
-import 'dayjs/locale/pt-br'
-const relativeTime = require('dayjs/plugin/relativeTime')
-dayjs.extend(relativeTime)
-dayjs.locale('pt-br')
 
 @Options({
   components: {
@@ -78,18 +53,22 @@ export default class DatasetDetail extends Vue {
   dataset!: DatasetDto
 
   formatIcon(format: string) {
+    console.log({format})
     const classes = ['fas', 'fa-2x']
-    const formatDict: any = {
+    const formatDict: Record<string, string> = {
       XML: 'fa-file-code',
+      JSON: 'fa-file-code',
       ZIP: 'fa-file-archive',
       TXT: 'fa-file-word',
       PNG: 'fa-file-image',
       PDF: 'fa-file-pdf',
       CSV: 'fa-file-csv',
+      ODS: 'fa-file-csv',
       EXCEL: 'fa-file-excel',
       URL: 'fa-external-link-square-alt',
       DOC: 'fa-file',
-      ALT: 'fa-file-alt'
+      ALT: 'fa-file-alt',
+      HTML: 'fa-external-link-square-alt'
     }
     format = format.toUpperCase()
 
@@ -101,92 +80,30 @@ export default class DatasetDetail extends Vue {
     return classes.join(' ')
   }
 
-  getDate(resource: any) {
-    let epochMills = 0
+  getDate(resource: DatasetDto['resources'][0]) {
+    let epochMills: number
     if(resource.updated_at) {
       epochMills = parseInt(resource.updated_at)
     } else {
       epochMills = parseInt(resource.created_at)
     }
 
-    return dayjs(epochMills).fromNow()
+    if(!epochMills) {
+      return 'data não divulgada'
+    }
+    return dayjs(epochMills).format('DD/MM/YYYY')
+  }
+
+  searchSite(organization: string): void {
+    this.$router.push('/dados/sites/' + organization)
+  }
+  searchOrg(organization: string): void {
+    this.$router.push('/dados/organizacoes/' + organization)
   }
 }
 </script>
 
 <style scoped>
-.detail {
-  width: auto;
-  margin: 0 0 0 0;
-}
-.dataset {
-  margin-left: 0.7rem;
-  width: 60%;
-  display: inline-block;
-  background-color: rgba(255, 255, 255, 0.473);
-  padding: 1rem;
-}
-.side-painel {
-  margin-left: 0.7rem;
-  width: 25%;
-  display: inline-block;
-  vertical-align:top;
-}
-.side-painel-section {
-  padding: 0.5rem;
-  margin-bottom: 0.7rem;
-  white-space: nowrap;
-  background-color: rgba(255, 255, 255, 0.473);
-}
-.dataset-name {
-  font-size: 1.7rem;
-  color:black;
-}
-.resources {
-  margin: 0 auto;
-  padding: 1rem;
-}
-a {
-  color: black;
-  text-decoration: none;
-}
-.resource-name {
-  color: black;
-  font-size: 0.8rem;
-  font-weight: bold;
-}
-.resource-description {
-  font-size: 0.7rem
-}
-.resource-date {
-  white-space: nowrap;
-}
-.section-title {
-  color: black;
-  text-align: start;
-  font-size: 1.2rem;
-}
-.organization-detail {
-  white-space: pre-line;
-  margin: 0 0 0 0;
-  font-size: 0.8rem;
-  display: inline-block;
-  margin-right: 0.5rem;
-}
-.aditional-info {
-  font-size: 0.7rem;
-  padding: 1rem;
-}
-.aditional-info-key {
-  color: black;
-  float: left;
-}
-.aditional-info-value {
-  float: right;
-}
-.organization-icon {
-  margin-left: 0.5rem;
-}
 .container {
   display: grid;
   grid-template-columns: 16px minmax(500px, 1fr) 16px 462px 16px;
@@ -200,5 +117,73 @@ a {
 
 .sidebar {
   grid-area: sidebar;
+}
+.dataset {
+  overflow: hidden;
+  box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.25);
+  background-color: white;
+  padding: 16px;
+  border-radius: 5px;
+  margin-top: 16px;
+  text-align: start;
+}
+.resource-detail, .organization-detail {
+  display: inline-block;
+  white-space: nowrap;
+}
+.resource-detail {
+  color: black;
+}
+.organization-detail {
+  color: rgba(0,0,0,0.80);
+}
+.organization-info {
+  display: inline-block;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 19px;
+  text-align: left;
+}
+.resources {
+  margin-top: 16px;
+  height: fit-content;
+  padding: 16px;
+}
+.resource {
+  display: inline-block;
+  position: relative;
+  white-space: nowrap;
+  width: 99%;
+  border-radius: 16px;
+  border: 1px solid #2B481F;
+  padding: 0 8px 0 8px;
+  margin:-16px;
+  margin-bottom: 32px;
+}
+.resource-icon {
+  top: -5px;
+}
+.resource-identity {
+  margin-left: 8px;
+  max-width: calc(100% - 115px);
+  overflow: hidden;
+}
+.resource-description {
+  max-width: calc(100%);
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.resource-date {
+  position: relative;
+  float: right;
+  top: 18px;
+}
+i {
+  position: relative;
+  top: -2px;
+}
+.clickabel {
+  cursor: pointer;
 }
 </style>

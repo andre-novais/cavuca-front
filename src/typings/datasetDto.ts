@@ -1,7 +1,7 @@
 export type DatasetDto = {
   name: string,
   description: string,
-  organization?: {
+  organization: {
     name: string,
     description: string,
     image_url: string

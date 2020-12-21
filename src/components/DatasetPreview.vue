@@ -56,7 +56,13 @@ export default class DatasetPreview extends Vue {
     })
     const lastUpdateEpoch = Math.min(...updatesEpochs)
 
-    return `${count} Arquivo${s} (${formats}) ultimo update ${dayjs(lastUpdateEpoch).fromNow()}`
+    let resourceInfo = `${count} Arquivo${s} (${formats})`
+
+    if(lastUpdateEpoch) {
+      resourceInfo += ` ultimo update ${dayjs(lastUpdateEpoch).fromNow()}`
+    }
+
+    return resourceInfo
   }
 
   datasetUrl(dataset: DatasetDto) {
@@ -69,7 +75,12 @@ export default class DatasetPreview extends Vue {
   }
 
   enterDataset() {
-    this.$router.push('/dados/' + this.dataset._id)
+    if(this.dataset._id) {
+      this.$router.push('/dados/' + this.dataset._id)
+    } else {
+      this.$router.push('/dados/' + this.dataset.mongo_id)
+    }
+
   }
 }
 </script>

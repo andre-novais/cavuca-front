@@ -121,6 +121,7 @@ export default class Header extends Vue {
     float: left;
     border-radius: 16px;
     cursor: pointer;
+    border: 1px solid rgba(0,0,0,1)
   }
   .organization {
     height: 49px;
