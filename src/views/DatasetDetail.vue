@@ -2,15 +2,9 @@
   <div class="container" v-if="dataset">
     <div class="main">
       <div class="dataset">
-        <div class="organization">
-          <i class="fas fa-user fa-xs organization-detail"></i>
-          <h3 class="organization-detail">
-            <h3 class="organization-info clickabel" v-on:click="searchSite(dataset.site_name)">{{ dataset.site_display_name  }}</h3>
-            / <h3 class="organization-info clickabel" v-on:click="searchOrg(dataset.organization.name)"> {{ dataset.organization.name }} </h3>
-          </h3>
-        </div>
+        <SiteAndOrganizationAnchor :site="dataset.site_display_name" :organization="dataset.organization.name"/>
         <h2>{{ dataset.name }}</h2>
-        <p>{{ filterDescription(dataset.description) }}</p>
+        <p class="description">{{ filterDescription(dataset.description) }}</p>
         <div class="resources">
           <a
             class="resource"
@@ -38,13 +32,15 @@
 <script lang="ts">
 import { Options, Vue } from "vue-class-component"
 import Tags from "@/components/Tags.vue"
+import SiteAndOrganizationAnchor from "@/components/SiteAndOrganizationAnchor.vue"
 import { DatasetDto } from "@/typings/datasetDto"
 
 const dayjs = require('dayjs')
 
 @Options({
   components: {
-    Tags
+    Tags,
+    SiteAndOrganizationAnchor
   },
   props: {
     dataset: Object

@@ -1,12 +1,6 @@
 <template>
   <div class="dataset" >
-    <div class="organization">
-      <i class="fas fa-user fa-xs organization-detail"></i>
-      <h3 class="organization-detail">
-        <h3 class="organization-info clickabel" v-on:click="searchSite(dataset.site_display_name)">{{ dataset.site_display_name  }}</h3>
-        / <h3 class="organization-info clickabel" v-on:click="searchOrg(dataset.organization.name)"> {{ dataset.organization.name }} </h3>
-      </h3>
-    </div>
+    <SiteAndOrganizationAnchor :site="dataset.site_display_name" :organization="dataset.organization.name"/>
     <div class="dataset-link" v-on:click="enterDataset()">
       <h2 class="info name">{{ dataset.name }}</h2>
     <div>
@@ -24,6 +18,7 @@
 <script lang="ts">
 import { Options, Vue } from "vue-class-component"
 import Tags from "@/components/Tags.vue"
+import SiteAndOrganizationAnchor from "@/components/SiteAndOrganizationAnchor.vue"
 import { DatasetDto } from '@/typings/datasetDto'
 
 const dayjs = require('dayjs')
@@ -34,7 +29,8 @@ dayjs.locale('pt-br')
 
 @Options({
   components: {
-    Tags
+    Tags,
+    SiteAndOrganizationAnchor
   },
   props: {
     dataset: Object
