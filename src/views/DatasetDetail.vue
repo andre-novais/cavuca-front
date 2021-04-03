@@ -12,6 +12,7 @@
             :key="resource.name"
             :href="resource.url"
             target="#"
+            v-on:click="showModal()"
           >
             <i class="resource-detail resource-icon" :class="formatIcon(resource.format)"></i>
             <div class="resource-detail resource-identity">
@@ -26,6 +27,9 @@
     <div class="sidebar">
       <Tags :tags="dataset.tags" />
     </div>
+    <div v-if="modalVisible">
+      <SurveyLinkModal />
+    </div>
   </div>
 </template>
 
@@ -34,13 +38,15 @@ import { Options, Vue } from "vue-class-component"
 import Tags from "@/components/Tags.vue"
 import SiteAndOrganizationAnchor from "@/components/SiteAndOrganizationAnchor.vue"
 import { DatasetDto } from "@/typings/datasetDto"
+import SurveyLinkModal from "@/components/SurveyLinkModal.vue"
 
 const dayjs = require('dayjs')
 
 @Options({
   components: {
     Tags,
-    SiteAndOrganizationAnchor
+    SiteAndOrganizationAnchor,
+    SurveyLinkModal
   },
   props: {
     dataset: Object
@@ -48,6 +54,7 @@ const dayjs = require('dayjs')
 })
 export default class DatasetDetail extends Vue {
   dataset!: DatasetDto
+  modalVisible=false
 
   formatIcon(format: string) {
     console.log({format})
@@ -100,6 +107,13 @@ export default class DatasetDetail extends Vue {
 
   filterDescription(description: string): string {
     return description.replaceAll(/<([\s\S]*?)>/g, '')
+  }
+
+  showModal() {
+    this!.modalVisible = true
+
+    const modal = this!.modalVisible
+    console.log({modal})
   }
 }
 </script>
