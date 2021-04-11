@@ -3,7 +3,7 @@
     <div class="wrapper">
       <div class="modal-container">
         Obrigado por usar o Cavuca! <br><br>
-        Você poderia no ajudar a melhorar o site respondendo esse <a :href="surveyLink">questionário</a>?<br><br> 
+        Você poderia no ajudar a melhorar o site respondendo esse <a :href="surveyLink" target="_blank">questionário</a>?<br><br> 
         (menos de 5 minutos!) <br>
         <button v-on:click="visible=false">Fechar</button>
       </div>
